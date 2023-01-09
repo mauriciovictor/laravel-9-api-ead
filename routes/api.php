@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CourseController;
 use Dotenv\Repository\RepositoryInterface;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
@@ -10,3 +11,5 @@ Route::get('/', function () {
         "success" => true
     ]);
 });
+
+Route::get('/courses', [CourseController::class, 'index']);
