@@ -13,5 +13,5 @@ class Lesson extends Model
     public $incrementing = false;
     protected $keyType = 'uuid';
 
-    protected $fillable = ['name', 'description', 'video'];
+    protected $fillable = ['id', 'name', 'description', 'video'];
 }

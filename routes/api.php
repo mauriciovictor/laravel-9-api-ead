@@ -2,10 +2,8 @@
 
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\ModuleController;
-use App\Http\Controllers\LessonController;
-use Dotenv\Repository\RepositoryInterface;
-use GrahamCampbell\ResultType\Success;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\LessonController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
