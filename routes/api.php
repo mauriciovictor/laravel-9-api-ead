@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\ModuleController;
 use Dotenv\Repository\RepositoryInterface;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
@@ -15,3 +16,5 @@ Route::get('/', function () {
 Route::get('/courses', [CourseController::class, 'index']);
 
 Route::get('/courses/{id}', [CourseController::class, 'show']);
+
+Route::get('/courses/{id}/modules', [ModuleController::class, 'index']);
