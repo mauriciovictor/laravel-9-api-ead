@@ -15,11 +15,11 @@ class LessonResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray([
+        return [
             'id' => $this->id,
             'name' => Str::ucfirst(Str::lower($this->name)),
             'description' => $this->description,
             'video' => $this->video
-        ]);
+        ];
     }
 }
