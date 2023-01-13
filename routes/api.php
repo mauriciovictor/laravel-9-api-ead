@@ -6,11 +6,11 @@ use App\Http\Controllers\Api\LessonController;
 use App\Http\Controllers\Api\SupportController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return response()->json([
-        "success" => true
-    ]);
-});
+// Route::get('/', function () {
+//     return response()->json([
+//         "success" => false
+//     ]);
+// });
 
 Route::get('/courses', [CourseController::class, 'index']);
 
@@ -23,3 +23,4 @@ Route::get('/lessons/{id}', [LessonController::class, 'show']);
 
 
 Route::get('/supports', [SupportController::class, 'index']);
+Route::post('/supports', [SupportController::class, 'store']);

@@ -36,6 +36,17 @@ class SupportRepository
         return $supports;
     }
 
+    public function create(array $props): Support
+    {
+        $support = $this->getUserAutenticated()->supports()->create([
+            'lesson_id' => $props['lesson_id'],
+            'description' => $props['description'],
+            'status' => $props['status']
+        ]);
+
+        return $support;
+    }
+
     private function getUserAutenticated(): User
     {
         // return auth()->user();
