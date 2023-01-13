@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 
 use App\Models\Support;
+use App\Models\User;
 
 class SupportRepository
 {
@@ -15,8 +16,29 @@ class SupportRepository
         $this->entity = $model;
     }
 
-    public function find()
+    public function find(array $filters = [])
     {
-        return $this->entity::where('course_id', $courseId)->get();
+
+        $supports = $this->getUserAutenticated()
+            ->supports()
+            ->where(function ($query) use ($filters) {
+                if (isset($filters['lesson'])) {
+                    $query->where('lesson_id', $filters['lesson']);
+                }
+
+                if (isset($filters['filter'])) {
+                    $filter = $filters['filter'];
+                    $query->where('description', 'LIKE', "%{$filter}%");
+                }
+            })
+            ->get();
+
+        return $supports;
+    }
+
+    private function getUserAutenticated(): User
+    {
+        // return auth()->user();
+        return User::first();
     }
 }
