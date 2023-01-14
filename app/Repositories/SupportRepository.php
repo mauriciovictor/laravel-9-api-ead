@@ -31,6 +31,7 @@ class SupportRepository
                     $query->where('description', 'LIKE', "%{$filter}%");
                 }
             })
+            ->orderBy('updated_at')
             ->get();
 
         return $supports;
@@ -45,6 +46,21 @@ class SupportRepository
         ]);
 
         return $support;
+    }
+
+    public function createReplyToSupport(string $support_id, array $props)
+    {
+        $user = $this->getUserAutenticated();
+
+        return $this->getSupport($support_id)->replies()->create([
+            'description' => $props['description'],
+            'user_id' => $user->id,
+        ]);
+    }
+
+    private function getSupport(string $id)
+    {
+        return $this->entity->findOrFail($id);
     }
 
     private function getUserAutenticated(): User
