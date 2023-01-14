@@ -5,9 +5,11 @@ namespace App\Repositories;
 
 use App\Models\Support;
 use App\Models\User;
+use App\Repositories\Traits\RepositoryTrait;
 
 class SupportRepository
 {
+    use RepositoryTrait;
 
     protected $entity;
 
@@ -16,19 +18,36 @@ class SupportRepository
         $this->entity = $model;
     }
 
+    public function findUserSupports(array $filters = [])
+    {
+        $filters['user'] = true;
+        return $this->find($filters);
+    }
+
     public function find(array $filters = [])
     {
 
-        $supports = $this->getUserAutenticated()
-            ->supports()
+        $supports = $this->entity
+
             ->where(function ($query) use ($filters) {
                 if (isset($filters['lesson'])) {
                     $query->where('lesson_id', $filters['lesson']);
                 }
 
+                if (isset($filters['status'])) {
+                    $query->where('status', $filters['status']);
+                }
+
                 if (isset($filters['filter'])) {
                     $filter = $filters['filter'];
                     $query->where('description', 'LIKE', "%{$filter}%");
+                }
+
+                if (isset($filters['user'])) {
+
+                    $user = $this->getUserAutenticated();
+
+                    $query->where('user_id', $user->id);
                 }
             })
             ->orderBy('updated_at')
@@ -58,14 +77,8 @@ class SupportRepository
         ]);
     }
 
-    private function getSupport(string $id)
+    public function getSupport(string $id)
     {
         return $this->entity->findOrFail($id);
-    }
-
-    private function getUserAutenticated(): User
-    {
-        // return auth()->user();
-        return User::first();
     }
 }

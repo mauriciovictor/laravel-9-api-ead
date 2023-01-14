@@ -27,6 +27,13 @@ class SupportController extends Controller
         return SupportResource::collection($supports);
     }
 
+    public function UserSupports(Request $request)
+    {
+        $supports = $this->repository->findUserSupports($request->all());
+
+        return SupportResource::collection($supports);
+    }
+
     public function storeReply(StoreReplySupport $request, $support_id)
     {
 
