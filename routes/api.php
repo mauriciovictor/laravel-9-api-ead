@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\ModuleController;
 use App\Http\Controllers\Api\LessonController;
@@ -17,6 +18,12 @@ Route::get('/', function () {
 Route::post('/auth', [AuthController::class, 'auth']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
+
+Route::post(
+    '/forgot-password',
+    [ResetPasswordController::class, 'sendResetLink']
+)->middleware('guest');
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
