@@ -9,7 +9,6 @@ trait RepositoryTrait
 
     private function getUserAutenticated(): User
     {
-        // return auth()->user();
-        return User::first();
+        return auth()->user();
     }
 }
