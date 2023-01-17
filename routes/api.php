@@ -38,7 +38,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/lessons/{id}', [LessonController::class, 'show']);
 
 
-    Route::post('/lessons', [LessonController::class, 'viewed']);
+    Route::post('/lessons/viewed', [LessonController::class, 'viewed']);
 
     Route::get('/supports', [SupportController::class, 'index']);
     Route::post('/supports', [SupportController::class, 'store']);
