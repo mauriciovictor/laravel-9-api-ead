@@ -14,4 +14,14 @@ class Lesson extends Model
     protected $keyType = 'uuid';
 
     protected $fillable = ['id', 'name', 'description', 'video'];
+
+
+    public function views()
+    {
+        return $this->hasMany(View::class)->where(function ($query) {
+            if (auth()->check()) {
+                return $query->where('user_id', auth()->user()->id);
+            }
+        });
+    }
 }

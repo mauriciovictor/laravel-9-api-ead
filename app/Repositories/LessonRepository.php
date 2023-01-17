@@ -4,9 +4,11 @@ namespace App\Repositories;
 
 
 use App\Models\Lesson;
+use App\Repositories\Traits\RepositoryTrait;
 
 class LessonRepository
 {
+    use RepositoryTrait;
 
     protected $entity;
 
@@ -23,5 +25,22 @@ class LessonRepository
     public function findById(string $lessonId)
     {
         return $this->entity::where('id', $lessonId)->get();
+    }
+
+    public function markLessonViewed(string $lesson_id)
+    {
+        $user =  $this->getUserAutenticated();
+
+        $viewed = $user->views()->where('lesson_id', $lesson_id)->first();
+
+        if ($viewed) {
+            return $viewed->update([
+                'qty' => $viewed->qty + 1
+            ]);
+        }
+
+        return $user->views()->create([
+            'lesson_id' => $lesson_id
+        ]);
     }
 }

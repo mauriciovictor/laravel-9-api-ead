@@ -51,6 +51,11 @@ class User extends Authenticatable
         $this->notify(new ResetPasswordNotification($token));
     }
 
+    public function views()
+    {
+        return $this->hasMany(View::class);
+    }
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
