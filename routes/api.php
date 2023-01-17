@@ -48,9 +48,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/supports', [SupportController::class, 'UserSupports']);
 });
 
-// Route::get('/', function () {
-//     return response()->json([
-//         "success" => false
-//     ]);
-// });
+Route::get('/', function () {
+    return response()->json([
+        "success" => false
+    ]);
+});
 // Route::post('/supports', [SupportController::class, 'store']);
