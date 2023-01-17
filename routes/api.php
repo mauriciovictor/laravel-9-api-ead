@@ -9,11 +9,7 @@ use App\Http\Controllers\Api\ReplySupportController;
 use App\Http\Controllers\Api\SupportController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return response()->json([
-        "success" => false
-    ]);
-});
+
 
 Route::post('/auth', [AuthController::class, 'auth']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
@@ -22,6 +18,11 @@ Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 Route::post(
     '/forgot-password',
     [ResetPasswordController::class, 'sendResetLink']
+)->middleware('guest');
+
+Route::post(
+    '/reset-password',
+    [ResetPasswordController::class, 'resetPassword']
 )->middleware('guest');
 
 
@@ -45,6 +46,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/supports', [SupportController::class, 'UserSupports']);
 });
 
-
-
+// Route::get('/', function () {
+//     return response()->json([
+//         "success" => false
+//     ]);
+// });
 // Route::post('/supports', [SupportController::class, 'store']);
