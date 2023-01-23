@@ -14,4 +14,11 @@ trait TestTrait
 
         return $token;
     }
+
+    public function defaultHeaders()
+    {
+        return  [
+            'Authorization' =>  "Bearer {$this->createTokenUser()}"
+        ];
+    }
 }
