@@ -20,7 +20,7 @@ class LessonResource extends JsonResource
             'name' => Str::ucfirst(Str::lower($this->name)),
             'description' => $this->description,
             'video' => $this->video,
-            'views' => $this->views
+            'views' => ViewResource::collection($this->whenLoaded('views'))
         ];
     }
 }

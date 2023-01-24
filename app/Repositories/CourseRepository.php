@@ -24,7 +24,7 @@ class CourseRepository
 
     public function findById(string $id)
     {
-        $course = $this->entity::with('modules.lessons')->findOrFail($id);
+        $course = $this->entity::with('modules.lessons.views')->findOrFail($id);
 
 
         return new CourseResource($course);
