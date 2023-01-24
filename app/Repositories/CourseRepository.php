@@ -17,14 +17,14 @@ class CourseRepository
 
     public function findAll()
     {
-        $courses = $this->entity::get();
+        $courses = $this->entity::with('modules.lessons')->get();
 
         return CourseResource::collection($courses);
     }
 
     public function findById(string $id)
     {
-        $course = $this->entity::findOrFail($id);
+        $course = $this->entity::with('modules.lessons')->findOrFail($id);
 
 
         return new CourseResource($course);

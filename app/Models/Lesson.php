@@ -15,6 +15,10 @@ class Lesson extends Model
 
     protected $fillable = ['id', 'name', 'description', 'video'];
 
+    public function supports()
+    {
+        return $this->belongsTo(Support::class);
+    }
 
     public function views()
     {
