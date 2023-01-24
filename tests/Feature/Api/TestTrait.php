@@ -6,11 +6,19 @@ use App\Models\User;
 
 trait TestTrait
 {
-    public function createTokenUser()
+
+    public function createUser(): User
     {
         $user = User::factory()->create();
 
-        $token = $user->createToken('teste')->plainTextToken;
+        return $user;
+    }
+
+    public function createTokenUser()
+    {
+
+
+        $token = $this->createUser()->createToken('teste')->plainTextToken;
 
         return $token;
     }
