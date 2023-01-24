@@ -24,7 +24,7 @@ class LessonRepository
 
     public function findById(string $lessonId)
     {
-        return $this->entity::where('id', $lessonId)->get();
+        return $this->entity::findOrFail($lessonId);
     }
 
     public function markLessonViewed(string $lesson_id)

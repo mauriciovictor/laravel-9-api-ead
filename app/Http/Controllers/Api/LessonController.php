@@ -26,7 +26,8 @@ class LessonController extends Controller
 
     public function show($id)
     {
-        $lesson = $this->repository->findById($id)[0];
+        $lesson = $this->repository->findById($id);
+
 
         return new LessonResource($lesson);
     }
